@@ -3179,9 +3179,22 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //FirefoxXP Add Start
+    
+    fn = alloc_printf("%s/queue/id:%06u,%llu,%s", out_dir, queued_paths,
+                      get_cur_time() - start_time,
                       describe_op(hnb));
 
+    /*
+    original:
+    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
+                      describe_op(hnb));
+    */
+
+    //FirefoxXP Add End
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 #else
 
     fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths);
@@ -3262,9 +3275,21 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
       }
 
 #ifndef SIMPLE_FILES
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //FirefoxXP Add Start
+    
+    fn = alloc_printf("%s/hangs/id:%06llu,%llu,%s", out_dir,
+                        unique_hangs, get_cur_time() - start_time,
+                        describe_op(0));
 
-      fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
+    /*
+    original:
+          fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
                         unique_hangs, describe_op(0));
+    */
+
+    //FirefoxXP Add End
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #else
 
@@ -3307,9 +3332,21 @@ keep_as_crash:
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //FirefoxXP Add Start
+    
+    fn = alloc_printf("%s/crashes/id:%06llu,%llu,sig:%02u,%s", out_dir,
+                        unique_crashes, get_cur_time() - start_time,
+                        kill_signal, describe_op(0));
+    /*
+    original:
+          fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
                         unique_crashes, kill_signal, describe_op(0));
+    */
 
+    //FirefoxXP Add End
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      
 #else
 
       fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
