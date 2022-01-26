@@ -3182,7 +3182,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //FirefoxXP Add Start
     
-    fn = alloc_printf("%s/queue/id:%06u,%llu,%s", out_dir, queued_paths,
+    fn = alloc_printf("%s/queue/id:%06u,time:%llu,%s", out_dir, queued_paths,
                       get_cur_time() - start_time,
                       describe_op(hnb));
 
@@ -3278,7 +3278,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //FirefoxXP Add Start
     
-    fn = alloc_printf("%s/hangs/id:%06llu,%llu,%s", out_dir,
+    fn = alloc_printf("%s/hangs/id:%06llu,time:%llu,%s", out_dir,
                         unique_hangs, get_cur_time() - start_time,
                         describe_op(0));
 
@@ -3335,7 +3335,7 @@ keep_as_crash:
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //FirefoxXP Add Start
     
-    fn = alloc_printf("%s/crashes/id:%06llu,%llu,sig:%02u,%s", out_dir,
+    fn = alloc_printf("%s/crashes/id:%06llu,time:%llu,sig:%02u,%s", out_dir,
                         unique_crashes, get_cur_time() - start_time,
                         kill_signal, describe_op(0));
     /*
