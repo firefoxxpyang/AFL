@@ -3081,6 +3081,14 @@ static u8* describe_op(u8 hnb) {
   } else {
 
     sprintf(ret, "src:%06u", current_entry);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FirefoxXP Add Start
+
+    sprintf(ret, "time:%lu", get_cur_time() - start_time);
+
+//FirefoxXP Add End
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
 
     if (splicing_with >= 0)
       sprintf(ret + strlen(ret), "+%06u", splicing_with);
@@ -3179,21 +3187,19 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //FirefoxXP Add Start
-    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FirefoxXP Add Start
+    /*    
     fn = alloc_printf("%s/queue/id:%06u,time:%llu,%s", out_dir, queued_paths,
                       get_cur_time() - start_time,
                       describe_op(hnb));
-
-    /*
-    original:
+    */
+//FirefoxXP Add End
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
                       describe_op(hnb));
-    */
 
-    //FirefoxXP Add End
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     
 #else
 
@@ -3275,21 +3281,19 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
       }
 
 #ifndef SIMPLE_FILES
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //FirefoxXP Add Start
-    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FirefoxXP Add Start
+    /*    
     fn = alloc_printf("%s/hangs/id:%06llu,time:%llu,%s", out_dir,
                         unique_hangs, get_cur_time() - start_time,
                         describe_op(0));
-
-    /*
-    original:
-          fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
-                        unique_hangs, describe_op(0));
     */
 
-    //FirefoxXP Add End
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FirefoxXP Add End
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+          fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
+                        unique_hangs, describe_op(0));
 
 #else
 
@@ -3332,20 +3336,19 @@ keep_as_crash:
 
 #ifndef SIMPLE_FILES
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //FirefoxXP Add Start
-    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FirefoxXP Add Start
+    /*
     fn = alloc_printf("%s/crashes/id:%06llu,time:%llu,sig:%02u,%s", out_dir,
                         unique_crashes, get_cur_time() - start_time,
                         kill_signal, describe_op(0));
-    /*
-    original:
-          fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
-                        unique_crashes, kill_signal, describe_op(0));
     */
 
-    //FirefoxXP Add End
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FirefoxXP Add End
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+          fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
+                        unique_crashes, kill_signal, describe_op(0));
       
 #else
 
